@@ -18,7 +18,6 @@ namespace ARD_project.Service
         Task<ResponseModel<TokenModel>> LoginAsync(LoginModel login);
         Task<ResponseModel<TokenModel>> RefreshTokenAsync(TokenModel request);
 
-
     }
 
     public class IdentityService : IIdentityService
