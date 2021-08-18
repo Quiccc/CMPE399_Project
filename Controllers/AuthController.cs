@@ -6,7 +6,7 @@ using ARD_project.Service;
 namespace ARD_project.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IIdentityService _identityService;

@@ -7,7 +7,7 @@ namespace ARD_project.Model
         public ResponseModel()
         {
             IsSuccess = true;
-            Message = "";
+            Message = "Success";
         }
         [JsonProperty("isSuccess")]
         public bool IsSuccess { get; set; }

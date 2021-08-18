@@ -104,7 +104,8 @@ namespace ARD_project.Service
                 ClaimsIdentity Subject = new ClaimsIdentity(new Claim[]
                     {
                     new Claim("UserId", user.UserId.ToString()),             
-                    new Claim("UserName",user.UserName==null?"":user.UserName),
+                    new Claim("Username",user.UserName==null?"":user.UserName),
+                    new Claim("Password",user.Password==null?"":user.Password),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     });
                 foreach (var item in GetUserRole(user.UserId))

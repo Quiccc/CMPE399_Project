@@ -25,19 +25,19 @@ namespace ARD_project
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
-        {   
-            services.AddControllersWithViews().AddNewtonsoftJson();
+        {
+            services.AddControllersWithViews();
             services.AddMvc();
             services.AddDbContext<DemoTokenContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
 
-            // configure strongly typed settings objects
+            
             var appSettingsSection = Configuration.GetSection("ServiceConfiguration");
             services.Configure<ServiceConfiguration>(appSettingsSection);
             services.AddTransient<Service.IIdentityService, Service.IdentityService>();
             services.AddTransient<Service.IUserService, Service.UserService>();
-            // configure jwt authentication
+
             var serviceConfiguration = appSettingsSection.Get<ServiceConfiguration>();
             var JwtSecretkey = Encoding.ASCII.GetBytes(serviceConfiguration.JwtSettings.Secret);
             var tokenValidationParameters = new TokenValidationParameters
@@ -75,14 +75,14 @@ namespace ARD_project
              );
             });
 
-            // In production, the Angular files will be served from this directory
+            
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             
@@ -93,7 +93,6 @@ namespace ARD_project
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -117,8 +116,6 @@ namespace ARD_project
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
 
