@@ -21,6 +21,20 @@ namespace ARD_project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    TaskId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaskName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UsersMaster",
                 columns: table => new
                 {
@@ -69,7 +83,7 @@ namespace ARD_project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles_1", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_UserRoles_RolesMaster_RoleId",
                         column: x => x.RoleId,
@@ -78,6 +92,30 @@ namespace ARD_project.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_UsersMaster_UserId",
+                        column: x => x.UserId,
+                        principalTable: "UsersMaster",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTasks",
+                columns: table => new
+                {
+                    TaskId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTasks", x => new { x.TaskId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UserTasks_Tasks_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "Tasks",
+                        principalColumn: "TaskId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserTasks_UsersMaster_UserId",
                         column: x => x.UserId,
                         principalTable: "UsersMaster",
                         principalColumn: "UserId",
@@ -98,6 +136,16 @@ namespace ARD_project.Migrations
                 name: "IX_UserRoles_UserId",
                 table: "UserRoles",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTasks_TaskId",
+                table: "UserTasks",
+                column: "TaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTasks_UserId",
+                table: "UserTasks",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -109,7 +157,13 @@ namespace ARD_project.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
+                name: "UserTasks");
+
+            migrationBuilder.DropTable(
                 name: "RolesMaster");
+
+            migrationBuilder.DropTable(
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "UsersMaster");

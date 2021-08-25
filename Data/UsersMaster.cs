@@ -10,6 +10,7 @@ namespace ARD_project.Data
         {
             RefreshToken = new HashSet<RefreshToken>();
             UserRoles = new HashSet<UserRoles>();
+            UserTasks = new HashSet<UserTasks>();
         }
         [Key]
         public long UserId { get; set; }
@@ -19,5 +20,6 @@ namespace ARD_project.Data
         public string LastName { get; set; }
         public virtual ICollection<RefreshToken> RefreshToken { get; set; }
         public virtual ICollection<UserRoles> UserRoles { get; set; }
+        public virtual ICollection<UserTasks> UserTasks { get; set; }
     }
 }

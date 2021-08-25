@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ARD_project.Migrations
 {
     [DbContext(typeof(DemoTokenContext))]
-    [Migration("20210819100725_DbMigration")]
+    [Migration("20210819192935_DbMigration")]
     partial class DbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,24 @@ namespace ARD_project.Migrations
                     b.ToTable("RolesMaster");
                 });
 
+            modelBuilder.Entity("ARD_project.Data.Tasks", b =>
+                {
+                    b.Property<long>("TaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TaskName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TaskId");
+
+                    b.ToTable("Tasks");
+                });
+
             modelBuilder.Entity("ARD_project.Data.UserRoles", b =>
                 {
                     b.Property<long>("UserId")
@@ -77,13 +95,31 @@ namespace ARD_project.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("UserId", "RoleId")
-                        .HasName("PK_UserRoles_1");
+                        .HasName("PK_UserRoles");
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("ARD_project.Data.UserTasks", b =>
+                {
+                    b.Property<long>("TaskId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("TaskId", "UserId")
+                        .HasName("PK_UserTasks");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTasks");
                 });
 
             modelBuilder.Entity("ARD_project.Data.UsersMaster", b =>
@@ -140,9 +176,33 @@ namespace ARD_project.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ARD_project.Data.UserTasks", b =>
+                {
+                    b.HasOne("ARD_project.Data.Tasks", "Task")
+                        .WithMany("UserTasks")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ARD_project.Data.UsersMaster", "User")
+                        .WithMany("UserTasks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Task");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ARD_project.Data.RolesMaster", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("ARD_project.Data.Tasks", b =>
+                {
+                    b.Navigation("UserTasks");
                 });
 
             modelBuilder.Entity("ARD_project.Data.UsersMaster", b =>
@@ -150,6 +210,8 @@ namespace ARD_project.Migrations
                     b.Navigation("RefreshToken");
 
                     b.Navigation("UserRoles");
+
+                    b.Navigation("UserTasks");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,7 +23,6 @@ export class LoginComponent {
       const message = (<any>response).message;
       if (message == "Success") {
         const token = ((<any>response).data).token;
-        console.log(token);
         localStorage.setItem("jwt", token);
         this.invalidLogin = false;
         this.router.navigate([""]);

@@ -1,0 +1,23 @@
+<h1 id="tableLabel">Task List</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!tasks"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tasks">
+  <thead>
+    <tr>
+      <th>TaskID</th>
+      <th>Task Description</th>
+      <th>Deadline</th>
+      <th>Assigned To</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.taskId }}</td>
+      <td>{{ task.taskName }}</td>
+      <td>{{ task.deadline }}</td>
+    </tr>
+  </tbody>
+</table>
