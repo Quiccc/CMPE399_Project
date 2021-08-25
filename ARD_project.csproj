@@ -40,6 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\app\tasks\task.component.ts" />
   </ItemGroup>
 

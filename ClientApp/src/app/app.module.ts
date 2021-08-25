@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { TaskComponent } from './tasks/task.component';
 import { LoginComponent } from './api-auth/login/login.component';
 import { AuthInterceptorService } from './api-auth/auth-interceptor.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     TaskComponent,
     LoginComponent,
-    SidebarComponent,
     HomeComponent
    ],
   imports: [
