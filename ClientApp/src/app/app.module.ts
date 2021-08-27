@@ -3,21 +3,31 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MenubarModule } from 'primeng/menubar';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
 
 import { AppComponent } from './app.component';
 import { TaskComponent } from './tasks/task.component';
 import { LoginComponent } from './api-auth/login/login.component';
 import { AuthInterceptorService } from './api-auth/auth-interceptor.service';
 import { HomeComponent } from './home/home.component';
+import { MenubarComponent } from './menubar/menubar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MenubarComponent
    ],
   imports: [
+    PasswordModule,
+    MenubarModule,
+    InputTextModule,
+    ButtonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
