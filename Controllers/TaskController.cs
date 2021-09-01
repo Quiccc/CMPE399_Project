@@ -29,12 +29,16 @@ namespace ARD_project.Controllers
         public dynamic GetTasks()
         {
             var Tasks = from t in _context.Tasks
+                        join ts in _context.TaskStatus
+                        on t.TaskStatus equals ts
                         orderby t.Deadline ascending
                         select new
                         {
                             taskId = t.TaskId,
                             taskName = t.TaskName,
                             deadline = t.Deadline,
+                            statusId = ts.StatusId,
+                            statusName = ts.StatusName,
                             assignedUsers = from ut in t.UserTasks
                                          join um in _context.UsersMaster
                                          on ut.UserId equals um.UserId
@@ -61,6 +65,8 @@ namespace ARD_project.Controllers
                             on ut.TaskId equals t.TaskId
                             join um in _context.UsersMaster
                             on ut.UserId equals um.UserId
+                            join ts in _context.TaskStatus
+                            on t.TaskStatus equals ts
                             where ut.UserId == activeUserId.Last()
                             orderby t.Deadline ascending
                             select new
@@ -68,6 +74,8 @@ namespace ARD_project.Controllers
                                 taskId = t.TaskId,
                                 taskName = t.TaskName,
                                 deadline = t.Deadline,
+                                statusId = ts.StatusId,
+                                statusName = ts.StatusName,
                                 assignedUsers = from ut in t.UserTasks
                                                 join um in _context.UsersMaster
                                                 on ut.UserId equals um.UserId

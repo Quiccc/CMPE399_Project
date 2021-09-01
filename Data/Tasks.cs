@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ARD_project.Data
 {
@@ -16,6 +14,7 @@ namespace ARD_project.Data
         public long TaskId { get; set; }
         public string TaskName { get; set; }
         public DateTime Deadline { get; set; }
+        public TaskStatus TaskStatus { get; set; }
         public virtual ICollection<UserTasks> UserTasks { get; set; }
     }
 }

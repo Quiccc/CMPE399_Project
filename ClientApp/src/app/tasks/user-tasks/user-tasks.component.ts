@@ -26,9 +26,10 @@ export class UserTasksComponent {
   tasks: AllTasks[];
 
   constructor(private router: Router, private http: HttpClient) {
-    this.http.get<AllTasks[]>("https://localhost:44394/api/tasks/userTasks").toPromise().then(data => {
+    this.http.get<AllTasks[]>("https://localhost:44394/api/tasks/my-tasks").toPromise().then(data => {
       this.tasks = data;
       console.log(this.tasks);
     });
   }
 }
+""

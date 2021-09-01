@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,12 @@ namespace ARD_project.Controllers
             _context = context;
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("get-users")]
         [HttpGet]
         public dynamic GetUsers()
         {
-            var Users = from ut in _context.UserTasks
+            var Users = (from ut in _context.UserTasks
                         join um in _context.UsersMaster
                         on ut.UserId equals um.UserId
                         orderby um.FirstName ascending
@@ -37,14 +38,17 @@ namespace ARD_project.Controllers
                             userTasks = from ut in um.UserTasks
                                         join t in _context.Tasks
                                         on ut.TaskId equals t.TaskId
-                                        where ut.UserId == um.UserId
+                                        join ts in _context.TaskStatus
+                                        on t.TaskStatus equals ts
+                                        orderby ts.StatusId ascending
                                         select new
                                         {
                                             t.TaskId,
                                             t.TaskName,
-                                            t.Deadline
+                                            t.Deadline,
+                                            ts.StatusName
                                         }
-                        };
+                        }).DistinctBy(x => x.userId);
            return Users.ToList();
         }
     }

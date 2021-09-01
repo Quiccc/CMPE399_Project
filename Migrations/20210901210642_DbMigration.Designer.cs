@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ARD_project.Migrations
 {
     [DbContext(typeof(DemoTokenContext))]
-    [Migration("20210819192935_DbMigration")]
+    [Migration("20210901210642_DbMigration")]
     partial class DbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,21 @@ namespace ARD_project.Migrations
                     b.ToTable("RolesMaster");
                 });
 
+            modelBuilder.Entity("ARD_project.Data.TaskStatus", b =>
+                {
+                    b.Property<long>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("TaskStatus");
+                });
+
             modelBuilder.Entity("ARD_project.Data.Tasks", b =>
                 {
                     b.Property<long>("TaskId")
@@ -81,7 +96,12 @@ namespace ARD_project.Migrations
                     b.Property<string>("TaskName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("TaskStatusStatusId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("TaskId");
+
+                    b.HasIndex("TaskStatusStatusId");
 
                     b.ToTable("Tasks");
                 });
@@ -157,6 +177,15 @@ namespace ARD_project.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ARD_project.Data.Tasks", b =>
+                {
+                    b.HasOne("ARD_project.Data.TaskStatus", "TaskStatus")
+                        .WithMany("Tasks")
+                        .HasForeignKey("TaskStatusStatusId");
+
+                    b.Navigation("TaskStatus");
+                });
+
             modelBuilder.Entity("ARD_project.Data.UserRoles", b =>
                 {
                     b.HasOne("ARD_project.Data.RolesMaster", "Role")
@@ -198,6 +227,11 @@ namespace ARD_project.Migrations
             modelBuilder.Entity("ARD_project.Data.RolesMaster", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("ARD_project.Data.TaskStatus", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("ARD_project.Data.Tasks", b =>

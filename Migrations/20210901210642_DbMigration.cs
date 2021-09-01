@@ -21,17 +21,16 @@ namespace ARD_project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "TaskStatus",
                 columns: table => new
                 {
-                    TaskId = table.Column<long>(type: "bigint", nullable: false)
+                    StatusId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TaskName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.PrimaryKey("PK_TaskStatus", x => x.StatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,6 +47,27 @@ namespace ARD_project.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsersMaster", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    TaskId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaskName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deadline = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TaskStatusStatusId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.ForeignKey(
+                        name: "FK_Tasks_TaskStatus_TaskStatusStatusId",
+                        column: x => x.TaskStatusStatusId,
+                        principalTable: "TaskStatus",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +148,11 @@ namespace ARD_project.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_TaskStatusStatusId",
+                table: "Tasks",
+                column: "TaskStatusStatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
                 column: "RoleId");
@@ -167,6 +192,9 @@ namespace ARD_project.Migrations
 
             migrationBuilder.DropTable(
                 name: "UsersMaster");
+
+            migrationBuilder.DropTable(
+                name: "TaskStatus");
         }
     }
 }

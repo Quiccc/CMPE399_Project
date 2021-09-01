@@ -22,6 +22,7 @@ namespace ARD_project.Data
         public virtual DbSet<UsersMaster> UsersMaster { get; set; }
         public virtual DbSet<UserTasks> UserTasks { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
+        public virtual DbSet<TaskStatus> TaskStatus { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

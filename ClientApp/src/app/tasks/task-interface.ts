@@ -2,6 +2,8 @@ export interface AllTasks {
   taskId: bigint;
   taskName: string;
   deadline: string;
+  statusId: bigint;
+  statusName: string;
   assignedUsers: AssignedTo[];
 }
 

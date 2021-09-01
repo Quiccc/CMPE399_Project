@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { TableModule } from 'primeng/table';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { AllTasksComponent } from './tasks/all-tasks/all-tasks.component';
 import { UserTasksComponent } from './tasks/user-tasks/user-tasks.component';
+import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { UsersComponent } from './users/users.component';
 
 @NgModule({
@@ -26,6 +28,7 @@ import { UsersComponent } from './users/users.component';
     HomeComponent,
     UserTasksComponent,
     AllTasksComponent,
+    EditTaskComponent,
     MenubarComponent,
     UsersComponent
    ],
@@ -35,6 +38,7 @@ import { UsersComponent } from './users/users.component';
     MenubarModule,
     InputTextModule,
     ButtonModule,
+    DynamicDialogModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,

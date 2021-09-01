@@ -2,8 +2,9 @@
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
-            <th pColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
-            <th pColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
+            <th pSortableColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
+            <th pSortableColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
+            <th pSortableColumn="statusName">Status <p-sortIcon field="statusName"></p-sortIcon></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-task let-expanded="expanded">
@@ -13,6 +14,7 @@
             </td>
             <td>{{task.taskName}}</td>
             <td>{{task.deadline}}</td>
+            <td>{{task.statusName}}</td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-task>
@@ -22,19 +24,22 @@
                     <p-table [value]="task.assignedUsers" dataKey="userId" [resizableColumns]="true" [autoLayout]="true">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th style="width: 3rem"></th>
                                 <th pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName"></p-sortIcon></th>
                                 <th pSortableColumn="userLastName">Surname <p-sortIcon field="userLastName"></p-sortIcon></th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-assignedUser>
                             <tr>
+                                <td style="width: 3rem"></td>
                                 <td>{{assignedUser.userFirstName}}</td>
                                 <td>{{assignedUser.userLastName}}</td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="6">There is no one assigned to this task yet.</td>
+                                <td style="width: 3rem"></td>
+                                <td colspan="6">You have no partners in this task at the moment.</td>
                             </tr>
                         </ng-template>
                     </p-table>

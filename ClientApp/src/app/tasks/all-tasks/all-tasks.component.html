@@ -3,8 +3,10 @@
         <tr>
             <th style="width: 3rem"></th>
             <th pSortableColumn="taskId">Task Number <p-sortIcon field="taskId"></p-sortIcon></th>
-            <th pColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
-            <th pColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
+            <th pSortableColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
+            <th pSortableColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
+            <th pSortableColumn="statusName">Status <p-sortIcon field="statusName"></p-sortIcon></th>
+            <th style="width: 3rem"></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-task let-expanded="expanded">
@@ -15,6 +17,10 @@
             <td>{{task.taskId}}</td>
             <td>{{task.taskName}}</td>
             <td>{{task.deadline}}</td>
+            <td>{{task.statusName}}</td>
+            <td>
+            <button type="button" pButton class="p-button-text p-button-rounded p-button-plain" (click)="editTask()" [icon]="'pi pi-pencil'"></button>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-task>
@@ -24,6 +30,7 @@
                     <p-table [value]="task.assignedUsers" dataKey="userId" [resizableColumns]="true" [autoLayout]="true">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th style="width: 3rem"></th>
                                 <th pSortableColumn="userId">User ID <p-sortIcon field="userId"></p-sortIcon></th>
                                 <th pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName"></p-sortIcon></th>
                                 <th pSortableColumn="userLastName">Surname <p-sortIcon field="userLastName"></p-sortIcon></th>
@@ -31,6 +38,7 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-assignedUser>
                             <tr>
+                                <td style="width: 3rem"></td>
                                 <td>{{assignedUser.userId}}</td>
                                 <td>{{assignedUser.userFirstName}}</td>
                                 <td>{{assignedUser.userLastName}}</td>
