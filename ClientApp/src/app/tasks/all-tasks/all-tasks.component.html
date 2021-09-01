@@ -1,0 +1,49 @@
+<p-table [value]="tasks" dataKey="taskName" [resizableColumns]="true" [autoLayout]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="taskId">Task Number <p-sortIcon field="taskId"></p-sortIcon></th>
+            <th pColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
+            <th pColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="task" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+            <td>{{task.taskId}}</td>
+            <td>{{task.taskName}}</td>
+            <td>{{task.deadline}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-task>
+        <tr>
+            <td colspan="7">
+                <div class="p-p-3">
+                    <p-table [value]="task.assignedUsers" dataKey="userId" [resizableColumns]="true" [autoLayout]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="userId">User ID <p-sortIcon field="userId"></p-sortIcon></th>
+                                <th pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName"></p-sortIcon></th>
+                                <th pSortableColumn="userLastName">Surname <p-sortIcon field="userLastName"></p-sortIcon></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-assignedUser>
+                            <tr>
+                                <td>{{assignedUser.userId}}</td>
+                                <td>{{assignedUser.userFirstName}}</td>
+                                <td>{{assignedUser.userLastName}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">There is no one assigned to this task yet.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

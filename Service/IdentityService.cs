@@ -17,7 +17,6 @@ namespace ARD_project.Service
     {
         Task<ResponseModel<TokenModel>> LoginAsync(LoginModel login);
         Task<ResponseModel<TokenModel>> RefreshTokenAsync(TokenModel request);
-
     }
 
     public class IdentityService : IIdentityService
@@ -35,7 +34,6 @@ namespace ARD_project.Service
             _tokenValidationParameters = tokenValidationParameters;
         }
 
-
         public async Task<ResponseModel<TokenModel>> LoginAsync(LoginModel login)
         {
             ResponseModel<TokenModel> response = new ResponseModel<TokenModel>();
@@ -49,7 +47,6 @@ namespace ARD_project.Service
                     response.Message = "Invalid Username And Password";
                     return response;
                 }
-
 
                 AuthenticationResult authenticationResult = await AuthenticateAsync(loginUser);
                 if (authenticationResult != null && authenticationResult.Success)
@@ -92,7 +89,7 @@ namespace ARD_project.Service
 
         public async Task<AuthenticationResult> AuthenticateAsync(UsersMaster user)
         {
-            // authentication successful so generate jwt token
+
             AuthenticationResult authenticationResult = new AuthenticationResult();
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -129,7 +126,7 @@ namespace ARD_project.Service
                     JwtId = token.Id,
                     UserId = user.UserId,
                     CreationDate = DateTime.UtcNow,
-                    ExpiryDate = DateTime.UtcNow.AddMonths(6)
+                    ExpiryDate = DateTime.UtcNow.AddMinutes(15)
                 };
                 await _context.RefreshToken.AddAsync(refreshToken);
                 await _context.SaveChangesAsync();

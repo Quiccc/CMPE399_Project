@@ -1,15 +1,17 @@
 ﻿using ARD_project.Data;
+using ARD_project.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ARD_project.Controllers
 {
-    [Route("[controller]")]
+    [Route("/api/tasks")]
     [ApiController]
     public class TaskController : ControllerBase
     {
@@ -21,7 +23,8 @@ namespace ARD_project.Controllers
         }
 
 
-        [Route("/tasks")]
+        [Authorize(Roles ="Admin")]
+        [Route("get-tasks")]
         [HttpGet]
         public dynamic GetTasks()
         {
@@ -46,28 +49,35 @@ namespace ARD_project.Controllers
         }
 
 
-        [Authorize(Roles = "User")]
-        [Authorize(Roles = "Admin")]
-        [Route("/usertasks")]
+        [Authorize]
+        [Route("my-tasks")]
         [HttpGet]
         public dynamic GetUserTasks()
         {
-            long activeUserId = long.Parse(User.Identity.Name);
+            var activeUserId = (from rt in _context.RefreshToken orderby rt.RefreshTokenId ascending select rt.UserId);
+
             var userTasks = from ut in _context.UserTasks
                             join t in _context.Tasks
                             on ut.TaskId equals t.TaskId
                             join um in _context.UsersMaster
                             on ut.UserId equals um.UserId
-                            where ut.UserId == activeUserId
+                            where ut.UserId == activeUserId.Last()
                             orderby t.Deadline ascending
                             select new
                             {
                                 taskId = t.TaskId,
                                 taskName = t.TaskName,
-                                taskDeadline = t.Deadline,
-                                userId = ut.UserId,
-                                userFirstName = um.FirstName,
-                                userLastName = um.LastName
+                                deadline = t.Deadline,
+                                assignedUsers = from ut in t.UserTasks
+                                                join um in _context.UsersMaster
+                                                on ut.UserId equals um.UserId
+                                                where ut.UserId != activeUserId.Last()
+                                                select new
+                                                {
+                                                    userId = um.UserId,
+                                                    userFirstName = um.FirstName,
+                                                    userLastName = um.LastName
+                                                }
                             };
             return userTasks.ToList();
         }
