@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;  
 using System.Collections.Generic;  
   
-namespace ARD_project.Model
+namespace CMPE399_Project.Model
 {  
     public class TokenModel  
     {  

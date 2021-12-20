@@ -2,12 +2,12 @@
 <form class="form-signin" #loginForm="ngForm" (ngSubmit)="loginAsync(loginForm)">
 <div class="p-fluid" [style]= "{'padding':'10% 25%'}">
     <div class="p-field">
-        <label for="username" class="pi pi-user" [style]="{'color':'grey'}"> Username</label>
+        <label for="username" class="pi pi-user" style="font-size: x-large"> Username</label>
         <input id="username" name="username" type="text" pInputText [(ngModel)]="username">
     </div>
     <br>
     <div class="p-field">
-        <label for="password" class="pi pi-key" [style]="{'color':'grey'}"> Password</label>
+        <label for="password" class="pi pi-key" style="font-size: x-large"> Password</label>
         <input id="password" name="password" type="password" pInputText [(ngModel)]="password">
     </div>
     <br>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ARD_project.Model
+namespace CMPE399_Project.Model
 {
     public class ServiceConfiguration
     {

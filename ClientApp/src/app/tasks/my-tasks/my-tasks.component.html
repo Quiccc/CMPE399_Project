@@ -3,7 +3,6 @@
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
-            <th pSortableColumn="taskId">Task Number <p-sortIcon field="taskId"></p-sortIcon></th>
             <th pSortableColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
             <th pSortableColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
             <th pSortableColumn="statusName">Status <p-sortIcon field="statusName"></p-sortIcon></th>
@@ -14,9 +13,8 @@
             <td>
                 <button type="button" pButton pRipple [pRowToggler]="task" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
-            <td>{{task.taskId}}</td>
             <td>{{task.taskName}}</td>
-            <td><button pButton type="button" class="p-button-rounded" [label]="task.deadline" style="font-size: .75rem; font-weight: 700; min-width: 1.5rem; height: 1.5rem; line-height: 1.5rem;"></button></td>
+            <td><p-badge [value]="task.deadline"></p-badge></td>
             <td><button pButton type="button" class="p-button-rounded p-button-info" [label]="task.statusName" style="font-size: .75rem; font-weight: 700; min-width: 1.5rem; height: 1.5rem; line-height: 1.5rem;"></button></td>
         </tr>
     </ng-template>
@@ -28,7 +26,6 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width: 3rem"></th>
-                                <th pSortableColumn="userId">User ID <p-sortIcon field="userId"></p-sortIcon></th>
                                 <th pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName"></p-sortIcon></th>
                                 <th pSortableColumn="userLastName">Surname <p-sortIcon field="userLastName"></p-sortIcon></th>
                             </tr>
@@ -36,14 +33,14 @@
                         <ng-template pTemplate="body" let-assignedUser>
                             <tr>
                                 <td style="width: 3rem"></td>
-                                <td>{{assignedUser.userId}}</td>
                                 <td>{{assignedUser.userFirstName}}</td>
                                 <td>{{assignedUser.userLastName}}</td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="6">There is no one assigned to this task yet.</td>
+                                <td style="width: 3rem"></td>
+                                <td colspan="6">You have no partners in this task at the moment.</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -53,12 +50,12 @@
     </ng-template>
 </p-table>
 
+
 <br><div class="p-text-left" color="grey">Task History</div><br>
 <p-table [value]="tasks" dataKey="taskName" [resizableColumns]="true" [autoLayout]="true">
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
-            <th pSortableColumn="taskId">Task Number <p-sortIcon field="taskId"></p-sortIcon></th>
             <th pSortableColumn="taskName">Task Description <p-sortIcon field="taskName"></p-sortIcon></th>
             <th pSortableColumn="deadline">Deadline <p-sortIcon field="deadline"></p-sortIcon></th>
             <th pSortableColumn="statusName">Status <p-sortIcon field="statusName"></p-sortIcon></th>
@@ -69,11 +66,10 @@
             <td>
                 <button type="button" pButton pRipple [pRowToggler]="task" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
-            <td>{{task.taskId}}</td>
             <td>{{task.taskName}}</td>
             <td><p-badge [value]="task.deadline"></p-badge></td>
-            <td *ngIf="task.statusName == 'COMPLETED'"><button pButton type="button" class="p-button-rounded p-button-success" [label]="task.statusName" style="font-size: .75rem; font-weight: 700; min-width: 1.5rem; height: 1.5rem; line-height: 1.5rem;"></button></td>
-            <td *ngIf="task.statusName != 'COMPLETED'"><button pButton type="button" class="p-button-rounded p-button-danger" [label]="task.statusName" style="font-size: .75rem; font-weight: 700; min-width: 1.5rem; height: 1.5rem; line-height: 1.5rem;"></button></td>
+            <td *ngIf="task.statusName == 'COMPLETED'"><p-badge [value]="task.statusName" severity="success"></p-badge></td>
+            <td *ngIf="task.statusName != 'COMPLETED'"><p-badge [value]="task.statusName" severity="danger"></p-badge></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-task>
@@ -84,7 +80,6 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width: 3rem"></th>
-                                <th pSortableColumn="userId">User ID <p-sortIcon field="userId"></p-sortIcon></th>
                                 <th pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName"></p-sortIcon></th>
                                 <th pSortableColumn="userLastName">Surname <p-sortIcon field="userLastName"></p-sortIcon></th>
                             </tr>
@@ -92,14 +87,14 @@
                         <ng-template pTemplate="body" let-assignedUser>
                             <tr>
                                 <td style="width: 3rem"></td>
-                                <td>{{assignedUser.userId}}</td>
                                 <td>{{assignedUser.userFirstName}}</td>
                                 <td>{{assignedUser.userLastName}}</td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="6">There is no one assigned to this task yet.</td>
+                                <td style="width: 3rem"></td>
+                                <td colspan="6">You have no partners in this task at the moment.</td>
                             </tr>
                         </ng-template>
                     </p-table>

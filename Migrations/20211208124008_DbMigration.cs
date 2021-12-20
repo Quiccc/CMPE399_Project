@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ARD_project.Migrations
+namespace CMPE399_Project.Migrations
 {
     public partial class DbMigration : Migration
     {

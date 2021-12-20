@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ARD_project.Data
+namespace CMPE399_Project.Data
 {
     public partial class TaskStatus
     {

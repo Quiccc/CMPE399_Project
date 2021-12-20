@@ -7,11 +7,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using ARD_project.Data;
-using ARD_project.Model;
+using CMPE399_Project.Data;
+using CMPE399_Project.Model;
 using JwtRegisteredClaimNames = System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames;
 
-namespace ARD_project.Service
+namespace CMPE399_Project.Service
 {
     public interface IIdentityService
     {

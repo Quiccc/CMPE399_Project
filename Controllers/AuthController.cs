@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using ARD_project.Model;
-using ARD_project.Service;
+using CMPE399_Project.Model;
+using CMPE399_Project.Service;
 
-namespace ARD_project.Controllers
+namespace CMPE399_Project.Controllers
 {
     [ApiController]
     [Route("api/auth")]

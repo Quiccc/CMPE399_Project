@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MyTasksComponent } from '../tasks/my-tasks/my-tasks.component';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-users',
@@ -22,14 +24,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class UsersComponent{
 
   users: AllUsers[];
+  showUserTasks: boolean;
 
   constructor(private http: HttpClient) {
     this.http.get<AllUsers[]>('https://localhost:44394/api/users/get-users').toPromise().then(data => {
       this.users = data;
-      console.log(this.users);
     });
   }
-
 }
 
 interface AllUsers {

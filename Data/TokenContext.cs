@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using ARD_project.Data;
+using CMPE399_Project.Data;
 
-namespace ARD_project.Data
+namespace CMPE399_Project.Data
 {
     public partial class DemoTokenContext : DbContext
     {

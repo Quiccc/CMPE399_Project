@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ARD_project.Data;
-using ARD_project.Model;
+using CMPE399_Project.Data;
+using CMPE399_Project.Model;
 
-namespace ARD_project.Service
+namespace CMPE399_Project.Service
 {
     public interface IUserService
     {

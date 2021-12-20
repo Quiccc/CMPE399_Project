@@ -1,5 +1,5 @@
-using ARD_project.Data;
-using ARD_project.Model;
+using CMPE399_Project.Data;
+using CMPE399_Project.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ARD_project.Service;
+using CMPE399_Project.Service;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
 
-namespace ARD_project
+namespace CMPE399_Project
 {
     public class Startup
     {

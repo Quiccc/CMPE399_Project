@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ARD_project.Model
+namespace CMPE399_Project.Model
 {
     public class ResponseModel<T>
     {

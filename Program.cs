@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ARD_project
+namespace CMPE399_Project
 {
     public class Program
     {

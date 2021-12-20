@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ARD_project.Data
+namespace CMPE399_Project.Data
 {
     public partial class UserTasks
     {

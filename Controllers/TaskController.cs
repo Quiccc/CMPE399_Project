@@ -1,15 +1,10 @@
-﻿using ARD_project.Data;
-using ARD_project.Service;
+﻿using CMPE399_Project.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
-namespace ARD_project.Controllers
+namespace CMPE399_Project.Controllers
 {
     [Route("/api/tasks")]
     [ApiController]
@@ -23,7 +18,7 @@ namespace ARD_project.Controllers
         }
 
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("get-tasks")]
         [HttpGet]
         public dynamic GetTasks()
@@ -51,7 +46,6 @@ namespace ARD_project.Controllers
                         };
             return Tasks.ToList();
         }
-
 
         [Authorize]
         [Route("my-tasks")]
